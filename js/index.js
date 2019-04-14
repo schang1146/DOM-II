@@ -14,6 +14,7 @@ title.addEventListener('mouseout', function(event) {
 const navLink = document.querySelectorAll('.nav-link');
 navLink.forEach(link => {
     link.addEventListener('mousedown', function(event) {
+        event.preventDefault();
         link.style['color'] = 'blue';
         link.style['font-weight'] = 'bold';
     });
@@ -36,10 +37,10 @@ const bodyTextColor = document.querySelector('body');
 window.addEventListener('scroll', function(event) {
     let colors = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'];
     if (bodyTextColor.style['color'] != 'violet') {
-        bodyTextColor.style['color'] = colors[colors.indexOf(bodyTextColor.style['color'])+1];
+        bodyTextColor.style['color'] = colors[colors.indexOf(bodyTextColor.style['color']) + 1];
     } else {
         bodyTextColor.style['color'] = 'red';
-    }
+    };
 });
 
 // Event Listener #5
@@ -57,14 +58,12 @@ image.forEach(img => {
 // Event Listener #6
 image.forEach(img => {
     img.addEventListener('dblclick', function(event) {
-        event.stopPropagation();
         img.style.display = 'none';
     });
 });
 
 // Event Listener #7
 title.addEventListener('click', function(event) {
-    event.stopPropagation();
     TweenMax.to(title, 2, {x:getRandom(100), y:getRandom(100)});
 });
 
@@ -73,7 +72,26 @@ function getRandom(var1) {
 };
 
 // Event Listener #8
+const footer = document.querySelector('footer p');
+footer.addEventListener('dblclick', function(event) {
+    if (footer.style['font-size'] === '1.6rem') {
+        footer.style['font-size'] = '2.6rem';
+    } else {
+        footer.style['font-size'] = '1.6rem';
+    };
+});
 
 // Event Listener #9
+const textParagraph = document.querySelectorAll('p');
+textParagraph.forEach(textArea => {
+    textArea.addEventListener('cut', function(event) {
+        textArea.innerHTML = textArea.innerHTML.replace(window.getSelection().toString(), '_'.repeat(window.getSelection().toString().length));
+    });
+});
 
 // Event Listener #10
+bodyTextColor.addEventListener('keypress', function(event) {
+    if (event.key === 'f') {
+        bodyTextColor.style['color'] = 'black';
+    };
+});
